@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop - TechBit</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="topbar-left">
+    <span><i class="fa-solid fa-location-dot"></i> Shipping in all Kosovo</span>
+    <span><i class="fa-solid fa-flag"></i> Locale: EN</span>
+    <span><i class="fa-solid fa-euro-sign"></i> EUR <i class="fa-solid fa-chevron-down small"></i></span>
+  </div>
+  <div class="topbar-right">
+    <span><i class="fa-solid fa-box"></i> Track Order</span>
+    <span><i class="fa-solid fa-user"></i> My Account</span>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="logo">
+    <i class="fa-solid fa-microchip logo-icon"></i>
+    <div class="logo-text">
+      <span class="logo-title">TECH<span class="accent">B</span>IT</span>
+      <span class="logo-sub">COMPONENTS · TOOLS · INNOVATION</span>
+    </div>
+  </div>
+
+  <div class="search-bar">
+    <select class="cat-select">
+      <option>All Categories</option>
+      <option>Development Boards</option>
+      <option>Sensors & Modules</option>
+      <option>Components</option>
+      <option>Displays</option>
+    </select>
+    <input type="text" placeholder="Search products, categories, or brands...">
+    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+  </div>
+
+  <div class="header-right">
+    <div class="icon-link"><i class="fa-regular fa-heart"></i><span>Wishlist</span></div>
+    <a href="cart.html" class="icon-link cart">
+      <div class="cart-icon-wrap">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-count">0</span>
+      </div>
+      <span>Cart<br><strong class="cart-total-amount">€0.00</strong></span>
+    </a>
+  </div>
+</header>
+
+<!-- Nav -->
+<nav class="navbar">
+  <button class="categories-btn"><i class="fa-solid fa-bars"></i> Categories</button>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="active"><a href="shop.html">Shop</a></li>
+    <li><a href="shop.html">New Arrivals</a></li>
+    <li><a href="shop.html">Best Sellers</a></li>
+    <li><a href="shop.html">Brands</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <ul class="nav-badges">
+    <li><i class="fa-solid fa-bolt"></i> Fast Shipping</li>
+    <li><i class="fa-solid fa-shield-halved"></i> Secure Payments</li>
+    <li><i class="fa-solid fa-rotate-left"></i> Easy Returns</li>
+  </ul>
+</nav>
+
+<div class="main-wrapper">
+  <aside class="sidebar">
+    <ul id="shop-categories">
+      <li class="active" data-category="All"><a href="#"><i class="fa-solid fa-layer-group"></i> All Categories</a></li>
+      <li data-category="Development Boards"><a href="#"><i class="fa-solid fa-microchip"></i> Development Boards</a></li>
+      <li data-category="Sensors & Modules"><a href="#"><i class="fa-solid fa-satellite-dish"></i> Sensors & Modules</a></li>
+      <li data-category="Components"><a href="#"><i class="fa-solid fa-puzzle-piece"></i> Components</a></li>
+      <li data-category="Displays"><a href="#"><i class="fa-regular fa-rectangle-list"></i> Displays</a></li>
+      <li data-category="Power Supplies"><a href="#"><i class="fa-solid fa-battery-full"></i> Power Supplies</a></li>
+      <li data-category="Tools & Equipment"><a href="#"><i class="fa-solid fa-screwdriver-wrench"></i> Tools & Equipment</a></li>
+      <li data-category="Robotics"><a href="#"><i class="fa-solid fa-robot"></i> Robotics</a></li>
+      <li data-category="LED & Lighting"><a href="#"><i class="fa-solid fa-lightbulb"></i> LED & Lighting</a></li>
+      <li data-category="Prototyping"><a href="#"><i class="fa-regular fa-square"></i> Prototyping</a></li>
+    </ul>
+  </aside>
+
+  <section class="shop-content">
+    <div class="shop-toolbar">
+      <h1>Shop</h1>
+      <input type="text" id="shop-search" placeholder="Search within shop...">
+      <span class="shop-count-label"><span id="shop-count">0</span> products</span>
+    </div>
+    <div class="product-grid" id="shop-grid"></div>
+  </section>
+</div>
+
+<footer>
+  <p>&copy; 2026 TechBit. Demo skeleton page — replace placeholder data and images with your own.</p>
+</footer>
+
+<script src="products.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
