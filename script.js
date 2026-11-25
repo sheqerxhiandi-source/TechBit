@@ -60,10 +60,16 @@ function cartTotal() {
   }, 0);
 }
 
+function formatEuro(amount) {
+  const cents = amount * 100;
+  const decimals = Math.abs(cents - Math.round(cents)) > 1e-8 ? 3 : 2;
+  return `€${amount.toFixed(decimals)}`;
+}
+
 // Updates the little cart badge + total shown in the header on every page
 function updateHeaderCart() {
   document.querySelectorAll(".cart-count").forEach(el => el.textContent = cartCount());
-  document.querySelectorAll(".cart-total-amount").forEach(el => el.textContent = "€" + cartTotal().toFixed(2));
+  document.querySelectorAll(".cart-total-amount").forEach(el => el.textContent = formatEuro(cartTotal()));
 }
 
 // ---------- Home page: Popular Products grid (#product-grid) ----------
@@ -86,7 +92,7 @@ function productCardHTML(p) {
       </a>
       <h4><a href="product.html?id=${p.id}">${p.name}</a></h4>
       <div class="product-footer">
-        <span class="product-price">€${p.price.toFixed(2)}</span>
+        <span class="product-price">${formatEuro(p.price)}</span>
         <button title="Add to cart" onclick="addToCart(${p.id}); event.stopPropagation();">
           <i class="fa-solid fa-cart-shopping"></i>
         </button>
@@ -175,7 +181,7 @@ function renderProductDetail() {
       <div class="detail-info">
         <span class="detail-category">${product.category}</span>
         <h1>${product.name}</h1>
-        <p class="detail-price">€${product.price.toFixed(2)}</p>
+        <p class="detail-price">${formatEuro(product.price)}</p>
         <p class="detail-desc">${product.desc}</p>
         <div class="detail-actions">
           <input type="number" id="qty-input" value="1" min="1" />
@@ -223,20 +229,20 @@ function renderCartPage() {
         </div>
         <div class="cart-row-info">
           <h4>${p.name}</h4>
-          <span>€${p.price.toFixed(2)} each</span>
+          <span>${formatEuro(p.price)} each</span>
         </div>
         <div class="cart-row-qty">
           <button onclick="setQty(${id}, ${qty - 1})">-</button>
           <span>${qty}</span>
           <button onclick="setQty(${id}, ${qty + 1})">+</button>
         </div>
-        <div class="cart-row-subtotal">€${(p.price * qty).toFixed(2)}</div>
+        <div class="cart-row-subtotal">${formatEuro(p.price * qty)}</div>
         <button class="cart-row-remove" onclick="removeFromCart(${id})"><i class="fa-solid fa-trash"></i></button>
       </div>
     `;
   }).join("");
 
-  document.getElementById("cart-summary-total").textContent = "€" + cartTotal().toFixed(2);
+  document.getElementById("cart-summary-total").textContent = formatEuro(cartTotal());
 }
 
 // ---------- Contact page form (#contact-form) ----------
