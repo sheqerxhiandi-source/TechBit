@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Your Cart - TechBit</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=single-search-20261125a">
 </head>
 <body>
 
 <!-- Top bar -->
 <div class="topbar">
   <div class="topbar-left">
-    <span><i class="fa-solid fa-location-dot"></i> Shipping in all Kosovo</span>
+    <span><i class="fa-solid fa-location-dot"></i> Delivery across Kosovo</span>
     <span><i class="fa-solid fa-flag"></i> Locale: EN</span>
     <span><i class="fa-solid fa-euro-sign"></i> EUR <i class="fa-solid fa-chevron-down small"></i></span>
   </div>
@@ -24,25 +24,21 @@
 
 <!-- Header -->
 <header class="header">
+  <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="site-nav" aria-expanded="false">
+    <i class="fa-solid fa-bars"></i>
+  </button>
   <div class="logo">
-    <i class="fa-solid fa-microchip logo-icon"></i>
+    <img class="logo-mark" src="images/techbit-logo-mark.png" alt="TechBit logo">
     <div class="logo-text">
       <span class="logo-title">TECH<span class="accent">B</span>IT</span>
       <span class="logo-sub">COMPONENTS · TOOLS · INNOVATION</span>
     </div>
   </div>
 
-  <div class="search-bar">
-    <select class="cat-select">
-      <option>All Categories</option>
-      <option>Development Boards</option>
-      <option>Sensors & Modules</option>
-      <option>Components</option>
-      <option>Displays</option>
-    </select>
-    <input type="text" placeholder="Search products, categories, or brands...">
-    <button><i class="fa-solid fa-magnifying-glass"></i></button>
-  </div>
+  <form class="search-bar" role="search" action="shop.html" method="get">
+    <input type="search" name="q" placeholder="Search components..." aria-label="Search products">
+    <button type="submit" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+  </form>
 
   <div class="header-right">
     <div class="icon-link"><i class="fa-regular fa-heart"></i><span>Wishlist</span></div>
@@ -57,7 +53,7 @@
 </header>
 
 <!-- Nav -->
-<nav class="navbar">
+<nav class="navbar" id="site-nav">
   <button class="categories-btn"><i class="fa-solid fa-bars"></i> Categories</button>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>

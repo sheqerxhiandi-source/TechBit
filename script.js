@@ -78,8 +78,12 @@ function renderHomeProducts() {
 // Reusable product card markup used by home + shop pages
 function productCardHTML(p) {
   return `
-    <div class="product-card">
-      <a href="product.html?id=${p.id}" class="product-thumb"><i class="${p.icon}"></i></a>
+    <div class="product-card" data-product-id="${p.id}">
+      <a href="product.html?id=${p.id}" class="product-thumb">
+        ${p.image
+          ? `<img src="${p.image}" alt="${p.name}">`
+          : `<i class="${p.icon}"></i>`}
+      </a>
       <h4><a href="product.html?id=${p.id}">${p.name}</a></h4>
       <div class="product-footer">
         <span class="product-price">€${p.price.toFixed(2)}</span>
@@ -96,12 +100,17 @@ function renderShopPage() {
   const grid = document.getElementById("shop-grid");
   if (!grid) return;
 
-  const searchInput = document.getElementById("shop-search");
+  const headerSearchInput = document.querySelector(".search-bar input[name='q']");
+  const searchCategoryInput = document.getElementById("search-category");
   const categoryLinks = document.querySelectorAll("#shop-categories li");
 
-  // Support links like shop.html?cat=Sensors%20%26%20Modules from index.html
-  const urlCategory = new URLSearchParams(window.location.search).get("cat");
+  const searchParams = new URLSearchParams(window.location.search);
+  const urlCategory = searchParams.get("cat");
+  const urlQuery = searchParams.get("q") || "";
   let activeCategory = "All";
+
+  if (headerSearchInput) headerSearchInput.value = urlQuery;
+  if (searchCategoryInput) searchCategoryInput.value = urlCategory || "";
 
   if (urlCategory) {
     const matchingLi = Array.from(categoryLinks).find(li => li.dataset.category === urlCategory);
@@ -113,7 +122,7 @@ function renderShopPage() {
   }
 
   function draw() {
-    const term = (searchInput ? searchInput.value : "").toLowerCase().trim();
+    const term = (headerSearchInput ? headerSearchInput.value : "").toLowerCase().trim();
     const filtered = PRODUCTS.filter(p => {
       const matchesCategory = activeCategory === "All" || p.category === activeCategory;
       const matchesSearch = p.name.toLowerCase().includes(term);
@@ -131,11 +140,10 @@ function renderShopPage() {
       categoryLinks.forEach(x => x.classList.remove("active"));
       li.classList.add("active");
       activeCategory = li.dataset.category;
+      if (searchCategoryInput) searchCategoryInput.value = activeCategory === "All" ? "" : activeCategory;
       draw();
     });
   });
-
-  if (searchInput) searchInput.addEventListener("input", draw);
 
   draw();
 }
@@ -159,7 +167,11 @@ function renderProductDetail() {
   container.innerHTML = `
     <nav class="breadcrumb"><a href="index.html">Home</a> / <a href="shop.html">Shop</a> / ${product.name}</nav>
     <div class="detail-layout">
-      <div class="detail-image"><i class="${product.icon}"></i></div>
+      <div class="detail-image">
+        ${product.image
+          ? `<img src="${product.image}" alt="${product.name}">`
+          : `<i class="${product.icon}"></i>`}
+      </div>
       <div class="detail-info">
         <span class="detail-category">${product.category}</span>
         <h1>${product.name}</h1>
@@ -204,7 +216,11 @@ function renderCartPage() {
     if (!p) return "";
     return `
       <div class="cart-row">
-        <div class="cart-row-thumb"><i class="${p.icon}"></i></div>
+        <div class="cart-row-thumb">
+          ${p.image
+            ? `<img src="${p.image}" alt="${p.name}">`
+            : `<i class="${p.icon}"></i>`}
+        </div>
         <div class="cart-row-info">
           <h4>${p.name}</h4>
           <span>€${p.price.toFixed(2)} each</span>
@@ -230,8 +246,87 @@ function initContactForm() {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    document.getElementById("contact-success").style.display = "block";
-    form.reset();
+    const formData = new FormData(form);
+    const subject = `TechBit contact message from ${formData.get("name")}`;
+    const body = [
+      `Name: ${formData.get("name")}`,
+      `Email: ${formData.get("email")}`,
+      "",
+      "Message:",
+      formData.get("message"),
+    ].join("\n");
+    const mailto = `mailto:Techbit.ks@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    document.getElementById("contact-success").hidden = false;
+    window.location.href = mailto;
+  });
+}
+
+function initHeroSlider() {
+  const slider = document.getElementById("hero-slider");
+  if (!slider) return;
+
+  const slides = Array.from(slider.querySelectorAll(".hero-slide"));
+  const dots = Array.from(slider.querySelectorAll(".slider-dots .dot"));
+  const previous = slider.querySelector(".slider-arrows .prev");
+  const next = slider.querySelector(".slider-arrows .next");
+  if (slides.length < 2 || dots.length !== slides.length || !previous || !next) return;
+
+  let activeIndex = 0;
+
+  function showSlide(index) {
+    activeIndex = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => {
+      const active = i === activeIndex;
+      slide.classList.toggle("active", active);
+      slide.setAttribute("aria-hidden", String(!active));
+      dots[i].classList.toggle("active", active);
+      dots[i].setAttribute("aria-pressed", String(active));
+    });
+  }
+
+  function restartTimer() {
+    window.clearInterval(timer);
+    timer = window.setInterval(() => showSlide(activeIndex + 1), 6000);
+  }
+
+  let timer = window.setInterval(() => showSlide(activeIndex + 1), 6000);
+  previous.addEventListener("click", () => {
+    showSlide(activeIndex - 1);
+    restartTimer();
+  });
+  next.addEventListener("click", () => {
+    showSlide(activeIndex + 1);
+    restartTimer();
+  });
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+      showSlide(i);
+      restartTimer();
+    });
+  });
+}
+
+function initMobileMenu() {
+  const toggle = document.querySelector(".mobile-menu-toggle");
+  const navigation = document.getElementById("site-nav");
+  if (!toggle || !navigation) return;
+
+  function setOpen(open) {
+    document.body.classList.toggle("mobile-nav-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+    toggle.innerHTML = `<i class="fa-solid ${open ? "fa-xmark" : "fa-bars"}"></i>`;
+  }
+
+  toggle.addEventListener("click", () => {
+    setOpen(toggle.getAttribute("aria-expanded") !== "true");
+  });
+  navigation.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => setOpen(false));
+  });
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 600) setOpen(false);
   });
 }
 
@@ -243,14 +338,8 @@ document.addEventListener("DOMContentLoaded", () => {
   renderProductDetail();
   renderCartPage();
   initContactForm();
-
-  // Hero slider dots (index.html only, harmless elsewhere since it's empty NodeList)
-  document.querySelectorAll(".slider-dots .dot").forEach(dot => {
-    dot.addEventListener("click", () => {
-      document.querySelectorAll(".slider-dots .dot").forEach(d => d.classList.remove("active"));
-      dot.classList.add("active");
-    });
-  });
+  initHeroSlider();
+  initMobileMenu();
 
   // Checkout button on cart.html (demo only, no real backend)
   const checkoutBtn = document.getElementById("checkout-btn");
