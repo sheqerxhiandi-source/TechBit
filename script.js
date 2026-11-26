@@ -85,12 +85,12 @@ function renderHomeProducts() {
 function productCardHTML(p) {
   return `
     <div class="product-card" data-product-id="${p.id}">
-      <a href="product.html?id=${p.id}" class="product-thumb">
+      <a href="/product/?id=${p.id}" class="product-thumb">
         ${p.image
           ? `<img src="${p.image}" alt="${p.name}">`
           : `<i class="${p.icon}"></i>`}
       </a>
-      <h4><a href="product.html?id=${p.id}">${p.name}</a></h4>
+      <h4><a href="/product/?id=${p.id}">${p.name}</a></h4>
       <div class="product-footer">
         <span class="product-price">${formatEuro(p.price)}</span>
         <button title="Add to cart" onclick="addToCart(${p.id}); event.stopPropagation();">
@@ -164,14 +164,14 @@ function renderProductDetail() {
   const product = findProduct(id);
 
   if (!product) {
-    container.innerHTML = `<p>Product not found. <a href="shop.html">Back to shop</a></p>`;
+    container.innerHTML = `<p>Product not found. <a href="/shop/">Back to shop</a></p>`;
     return;
   }
 
   document.title = product.name + " - TechBit";
 
   container.innerHTML = `
-    <nav class="breadcrumb"><a href="index.html">Home</a> / <a href="shop.html">Shop</a> / ${product.name}</nav>
+    <nav class="breadcrumb"><a href="/">Home</a> / <a href="/shop/">Shop</a> / ${product.name}</nav>
     <div class="detail-layout">
       <div class="detail-image">
         ${product.image
@@ -212,7 +212,7 @@ function renderCartPage() {
   const entries = Object.entries(cart);
 
   if (!entries.length) {
-    container.innerHTML = `<p class="empty-msg">Your cart is empty. <a href="shop.html">Browse products</a></p>`;
+    container.innerHTML = `<p class="empty-msg">Your cart is empty. <a href="/shop/">Browse products</a></p>`;
     document.getElementById("cart-summary-total").textContent = "€0.00";
     return;
   }
