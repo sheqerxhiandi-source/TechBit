@@ -1,8 +1,12 @@
+---
+permalink: /shop/
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="/">
 <title>Shop - TechBit</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="style.css?v=single-search-20261125a">
@@ -35,7 +39,7 @@
     </div>
   </div>
 
-  <form class="search-bar" role="search" action="shop.html" method="get">
+  <form class="search-bar" role="search" action="/shop/" method="get">
     <input type="hidden" name="cat" id="search-category">
     <input type="search" name="q" placeholder="Search components..." aria-label="Search products">
     <button type="submit" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -43,7 +47,7 @@
 
   <div class="header-right">
     <div class="icon-link"><i class="fa-regular fa-heart"></i><span>Wishlist</span></div>
-    <a href="cart.html" class="icon-link cart">
+    <a href="/cart/" class="icon-link cart">
       <div class="cart-icon-wrap">
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="cart-count">0</span>
@@ -58,12 +62,12 @@
   <button class="categories-btn"><i class="fa-solid fa-bars"></i> Categories</button>
   <ul class="nav-links">
     <li><a href="/">Home</a></li>
-    <li class="active"><a href="shop.html">Shop</a></li>
-    <li><a href="shop.html">New Arrivals</a></li>
-    <li><a href="shop.html">Best Sellers</a></li>
-    <li><a href="shop.html">Brands</a></li>
+    <li class="active"><a href="/shop/">Shop</a></li>
+    <li><a href="/shop/">New Arrivals</a></li>
+    <li><a href="/shop/">Best Sellers</a></li>
+    <li><a href="/shop/">Brands</a></li>
     <li><a href="#">Blog</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="/contact/">Contact</a></li>
   </ul>
   <ul class="nav-badges">
     <li><i class="fa-solid fa-bolt"></i> Fast Shipping</li>
