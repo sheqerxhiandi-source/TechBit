@@ -73,24 +73,56 @@ button { cursor: pointer; font-family: inherit; }
 
 .search-bar {
   display: flex;
+  align-items: center;
   flex: 1;
   max-width: 600px;
   min-width: 260px;
+  height: 46px;
+  padding: 4px;
+  background: linear-gradient(135deg, #101827, #0b1120);
+  border: 1px solid #263449;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18), inset 0 1px rgba(255, 255, 255, 0.03);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.search-bar:focus-within {
+  border-color: rgba(59, 130, 246, 0.8);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16), 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 .search-bar input {
   flex: 1;
+  min-width: 0;
   border: none;
-  padding: 0 12px;
-  background: #f8fafc;
-  color: #111;
-  border-radius: 4px 0 0 4px;
+  outline: none;
+  padding: 0 14px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+}
+.search-bar input::placeholder {
+  color: var(--text-dim);
 }
 .search-bar button {
-  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 36px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
   border: none;
   color: #fff;
-  padding: 0 18px;
-  border-radius: 0 4px 4px 0;
+  border-radius: 8px;
+  transition: filter 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.search-bar button:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
+}
+.search-bar button:focus-visible {
+  outline: 2px solid var(--accent-light);
+  outline-offset: 2px;
 }
 
 .header-right { display: flex; align-items: center; gap: 24px; }
@@ -183,7 +215,7 @@ button { cursor: pointer; font-family: inherit; }
   content: "";
   position: absolute;
   inset: 0;
-  background: url("images/circuit-traces.svg") no-repeat right center / 68% 100%;
+  background: url("images/circuit-traces.svg?v=angular-traces-20261127") no-repeat right center / 68% 100%;
   opacity: .48;
   pointer-events: none;
 }
@@ -409,9 +441,8 @@ footer {
   .header-right .icon-link i { font-size: 23px; }
   .header-right .cart > span { display: none; }
   .search-bar { grid-column: 1 / -1; order: 3; flex: none; width: 100%; max-width: none; min-width: 0; height: 46px; }
-  .search-bar input { min-width: 0; padding: 0 14px; font-size: 15px; background: #111722; color: var(--text); border: 1px solid #394150; border-right: 0; border-radius: 9px 0 0 9px; }
-  .search-bar input::placeholder { color: #a5adbb; }
-  .search-bar button { min-width: 48px; padding: 0 15px; border-radius: 0 9px 9px 0; }
+  .search-bar input { padding: 0 12px; font-size: 15px; }
+  .search-bar button { width: 38px; height: 36px; padding: 0; }
   .navbar { display: none; }
   body.mobile-nav-open .navbar {
     display: flex;

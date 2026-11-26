@@ -7,7 +7,7 @@
 // ============================================================
 
 const PRODUCTS = [
-  { id: 1,  name: "ESP32 DevKit V1 ESP32-WROOM-32",       price: 12.99, icon: "fa-solid fa-microchip",         image: "images/product-crops/esp32-user-new-cutout.png", category: "Development Boards", popular: true,
+  { id: 1,  name: "ESP32 DevKit V1 ESP32-WROOM-32",       price: 12.99, icon: "fa-solid fa-microchip",         image: "images/product-crops/esp32-user-photo-cutout.png", category: "Development Boards", popular: true,
     desc: "ESP32-WROOM-32 development board with 38 pins, CP2102 USB-to-serial, and a Type-C connector. Ideal for Wi-Fi and Bluetooth projects." },
   { id: 2,  name: "UNO R3 (ATmega328P CH340 + USB)",      price: 19.99, icon: "fa-brands fa-usb",               image: "images/arduino-user-sticker-crop.png", category: "Development Boards", popular: true,
     desc: "UNO R3 compatible development board based on the ATmega328P, with a CH340 USB interface and USB cable." },

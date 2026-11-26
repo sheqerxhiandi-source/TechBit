@@ -4,7 +4,7 @@ The catalog uses locally stored product photos and transparent PNG cutouts in `i
 
 | Product | Catalog image | Source |
 |---|---|---|
-| ESP32 DevKit V1 | `images/product-crops/esp32-user-new-cutout.png` | User-provided image attachment; background removed locally; original source/license not verified |
+| ESP32 DevKit V1 | `images/product-crops/esp32-user-photo-cutout.png` | User-provided 768x768 photo; original preserved at `images/product-crops/esp32-user-photo-source.jpg`; background removed locally; original source/license not verified |
 | Arduino Uno R3 | `images/arduino-user-sticker-crop.png` | Provided by the store owner |
 | HC-SR04 Ultrasonic Sensor | `images/product-crops/hc-sr04-user-cutout.png` | User-provided image attachment; background removed locally while preserving all four pins; original source/license not verified |
 | 0.96-inch OLED Display | `images/product-crops/oled-user-cutout.png` | User-provided image attachment; background removed locally; original source/license not verified |
