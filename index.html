@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <base href="/">
+<script>
+  if (window.location.pathname === "/index.html") {
+    window.history.replaceState(null, "", "/" + window.location.search + window.location.hash);
+  }
+</script>
 <title>TechBit - Components, Tools, Innovation</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="style.css?v=single-search-20261125a">
